@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>🔻 Kompresor File Web</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-gray-800 rounded-xl p-8 shadow-lg w-full max-w-xl">
+    <h1 class="text-2xl font-bold mb-6 text-yellow-400 text-center">🔻 Kompresor File Anda</h1>
+
+    {% if error %}
+      <div class="bg-red-500 text-white text-sm px-4 py-2 rounded mb-4">
+        ⚠️ {{ error }}
+      </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-4">
+      <div>
+        <label class="block text-sm font-semibold mb-1">📂 Pilih File (JPG, PNG, PDF, DOCX, PPTX)</label>
+        <input type="file" name="file" accept=".jpg,.jpeg,.png,.pdf,.docx,.pptx"
+               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded focus:outline-none" required>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1">🎛 Kualitas Kompresi</label>
+        <select name="kualitas"
+                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded focus:outline-none" required>
+          <option value="">-- Pilih Kualitas --</option>
+          <option value="Tinggi">Tinggi</option>
+          <option value="Sedang">Sedang</option>
+          <option value="Rendah">Rendah</option>
+        </select>
+      </div>
+
+      <div class="text-center">
+        <button type="submit"
+                class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-full transition">
+          🚀 Kompres Sekarang
+        </button>
+      </div>
+    </form>
+
+    {% if nama_file %}
+      <div class="mt-6 p-4 bg-gray-700 rounded border border-yellow-500">
+        <h2 class="text-yellow-400 font-semibold mb-2">📊 Hasil Kompresi</h2>
+        <p><strong>📄 Nama:</strong> {{ nama_file }}</p>
+        <p><strong>Ukuran Asli:</strong> {{ before_size }}</p>
+        <p><strong>Ukuran Kompresi:</strong> {{ after_size }}</p>
+
+        <div class="mt-3">
+          <a href="{{ download_url }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-5 rounded-full inline-block">
+            💾 Unduh File Hasil
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>
